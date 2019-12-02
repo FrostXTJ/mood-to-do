@@ -1,41 +1,48 @@
+<%@page import="general.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
-
 <head>
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Favicon-->
-	<link rel="shortcut icon" href="img/fav.png">
-	<!-- Author Meta -->
-	<meta name="author" content="codepixer">
-	<!-- Meta Description -->
-	<meta name="description" content="">
-	<!-- Meta Keyword -->
-	<meta name="keywords" content="">
-	<!-- meta character set -->
-	<meta charset="UTF-8">
-	<!-- Site Title -->
-	<title>Mood To Do</title>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="codepixer">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Mood To Do</title>
 
-	<!--
+<!--
 			Google Font
 			============================================= -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,600" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500i" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Montserrat:300,500,600"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500i"
+	rel="stylesheet">
 
-	<!--
+<!--
 			CSS
 			============================================= -->
-	<link rel="stylesheet" href="css/custom.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
-	<link rel="stylesheet" href="css/linearicons.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/magnific-popup.css">
-	<link rel="stylesheet" href="css/nice-select.css">
-	<link rel="stylesheet" href="css/animate.min.css">
-	<link rel="stylesheet" href="css/owl.carousel.css">
-	<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
+<link rel="stylesheet" href="css/linearicons.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/nice-select.css">
+<link rel="stylesheet" href="css/animate.min.css">
+<link rel="stylesheet" href="css/owl.carousel.css">
+<link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
@@ -49,17 +56,28 @@
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li class="menu-active"><a href="index.html">Home</a></li>
-						<li><a href="#">Sign Up</a></li>
-						<li><a href="#">Log In</a></li>
+						<li class="menu-active"><a href="index.jsp">Home</a></li>
+						<%
+							User user = (User) session.getAttribute("user");
+							if (user == null) {
+						%>
+						<li><a href="RegisterPage.jsp">Sign Up</a></li>
+						<li><a href="LoginPage.jsp">Log In</a></li>
+						<%
+							} else {
+						%>
+						<li><a href="index.jsp" onclick="signout();">Sign Out</a></li>
+						<%
+							}
+						%>
 						<li class="menu-has-children"><a href="">Setting</a>
 							<ul>
 								<li><a href="#">Elements</a></li>
-							</ul>
-						</li>
+							</ul></li>
 						<li><a href="#">Contact</a></li>
 					</ul>
-				</nav><!-- #nav-menu-container -->
+				</nav>
+				<!-- #nav-menu-container -->
 			</div>
 		</div>
 	</header>
@@ -69,35 +87,52 @@
 	<!-- Start Banner Area -->
 	<section class="home-banner-area relative">
 		<div class="container">
-			<div class="row fullscreen d-flex align-items-center justify-content-center">
+			<div
+				class="row fullscreen d-flex align-items-center justify-content-center">
 				<div class="banner-content col-lg-8 col-md-12">
-					<h1 class="wow fadeIn" data-wow-duration="4s">Follow your heart.<br/> Follow your mood.</h1>
-					
+					<h1 class="wow fadeIn" data-wow-duration="4s">
+						Follow your heart.<br /> Follow your mood.
+					</h1>
+
 					<h4 class="text-white">How do you feel right now?</h4>
 
 					<div class="courses pt-20">
 						<form action="MoodPageServlet">
-							<button type="submit" name="mood-btn" value="cheerful" data-wow-duration="1s" data-wow-delay=".3s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Cheeful &#128516;
+							<button type="submit" name="mood-btn" value="cheerful"
+								data-wow-duration="1s" data-wow-delay=".3s"
+								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
+								style="font-size: 18px; height: 40px;">Cheeful
+								&#128516;</button>
+
+							<button type="submit" name="mood-btn" value="excited"
+								data-wow-duration="1s" data-wow-delay=".6s"
+								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
+								style="font-size: 18px; height: 40px;">Excited
+								&#128541;</button>
+							<button type="submit" name="mood-btn" value="romantic"
+								data-wow-duration="1s" data-wow-delay=".9s"
+								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
+								style="font-size: 18px; height: 40px;">Romantic
+								&#128536;</button>
+							<button type="submit" name="mood-btn" value="tense"
+								data-wow-duration="1s" data-wow-delay="1.2s"
+								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
+								style="font-size: 18px; height: 40px;">Tense &#128534;
 							</button>
-							
-							<button type="submit" name="mood-btn" value="excited" data-wow-duration="1s" data-wow-delay=".6s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Excited &#128541;
+							<button type="submit" name="mood-btn" value="anxious"
+								data-wow-duration="1s" data-wow-delay="1.5s"
+								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
+								style="font-size: 18px; height: 40px;">Anxious
+								&#128552;</button>
+							<button type="submit" name="mood-btn" value="angry"
+								data-wow-duration="1s" data-wow-delay="1.8s"
+								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
+								style="font-size: 18px; height: 40px;">Angry &#128545;
 							</button>
-							<button type="submit" name="mood-btn" value="romantic" data-wow-duration="1s" data-wow-delay=".9s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Romantic &#128536;
-							</button>
-							<button type="submit" name="mood-btn" value="tense" data-wow-duration="1s" data-wow-delay="1.2s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;"> 
-								Tense &#128534;
-							</button>
-							<button type="submit" name="mood-btn" value="anxious" data-wow-duration="1s" data-wow-delay="1.5s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Anxious &#128552;
-							</button>
-							<button type="submit" name="mood-btn" value="angry" data-wow-duration="1s" data-wow-delay="1.8s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Angry &#128545;
-							</button>
-							<button type="submit" name="mood-btn" value="lonely" data-wow-duration="1s" data-wow-delay="2.1s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Lonely &#128546;
+							<button type="submit" name="mood-btn" value="lonely"
+								data-wow-duration="1s" data-wow-delay="2.1s"
+								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
+								style="font-size: 18px; height: 40px;">Lonely &#128546;
 							</button>
 						</form>
 					</div>
@@ -124,7 +159,7 @@
 						<li>Xuezheng Wu</li>
 					</ul>
 				</div>
-				
+
 				<div class="col-lg-6 col-md-6 single-footer-widget">
 					<h4>Contact Us</h4>
 					<ul>
@@ -137,19 +172,35 @@
 				</div>
 			</div>
 			<div class="footer-bottom row align-items-center">
-				<p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> | This webpage is a template made by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+				<p class="footer-text m-0 col-lg-8 col-md-12">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>document.write(new Date().getFullYear());</script>
+					| This webpage is a template made by <a href="https://colorlib.com"
+						target="_blank">Colorlib</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</p>
 			</div>
 		</div>
 	</footer>
 	<!-- End Footer Area -->
 
+	<script>
+	function signout() {
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "SuedoSignoutServlet", false);
+		xhr.send();
+	}
+	</script>
+
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	 crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
 	<script src="js/easing.min.js"></script>
 	<script src="js/hoverIntent.js"></script>
 	<script src="js/superfish.min.js"></script>
