@@ -32,20 +32,59 @@
 <!--
 			CSS
 			============================================= -->
-<link rel="stylesheet" href="css/custom.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
-<link rel="stylesheet" href="css/linearicons.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/magnific-popup.css">
-<link rel="stylesheet" href="css/nice-select.css">
-<link rel="stylesheet" href="css/animate.min.css">
-<link rel="stylesheet" href="css/owl.carousel.css">
-<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
+	<link rel="stylesheet" href="css/linearicons.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/nice-select.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
+	<link rel="stylesheet" href="css/main.css">
+	
+	
+	<!-- Web Socket Script -->	
+	<script type="text/javascript">
+	var socket;
+	function connectToServer(){
+		
+		var wsUri = "ws://" + document.location.host +"/MoodToDo/wss";
+		console.log(wsUri);
+		socket = new WebSocket(wsUri);
+		socket.onopen = function(event) {
+			//document.getElementById("mychat").innerHTML = "Connected!"  + "<br />"  + "<br />";
+			console.log("Connected!");
+		};
+		socket.onmessage = function(event) {
+			document.getElementById("mychat").innerHTML = event.data + "<br />";
+			var elm = document.getElementById("mychat");
+			var newone = elm.cloneNode(true);
+			elm.parentNode.replaceChild(newone, elm);
+		};
+		socket.onclose = function(event) {
+			//document.getElementById("mychat").innerHTML = "Disconnected!"  + "<br />";
+			console.log("Disconnected!");
+		};
+	}
+	
+	function sendEmotion(emo){
+	<%
+		String name = "Guest";
+		if ((User) session.getAttribute("user") != null) {
+			name = ((User) session.getAttribute("user")).getUsername();
+		}
+	%>
+		socket.send("<%=name%> is feeling " + emo);
+		console.log(emo);
+		return false;
+	}
+	</script>	
+	
 </head>
 
-<body>
+<body onload="connectToServer()">
+
 
 	<!-- Start Header Area -->
 	<header id="header">
@@ -80,6 +119,8 @@
 				<!-- #nav-menu-container -->
 			</div>
 		</div>
+		
+		
 	</header>
 	<!-- End Header Area -->
 
@@ -87,8 +128,12 @@
 	<!-- Start Banner Area -->
 	<section class="home-banner-area relative">
 		<div class="container">
-			<div
-				class="row fullscreen d-flex align-items-center justify-content-center">
+			<!-- Other User Emo Display -->
+			<div id="mychat" data-wow-duration="1s" data-wow-delay=".3s" class="transparent mr-10 mb-10 wow fadeInDown" 
+				style="font-size: 18px; height:40px; border:none; padding: 50px; color: white;">
+			</div>
+			
+			<div class="row fullscreen d-flex align-items-center justify-content-center">
 				<div class="banner-content col-lg-8 col-md-12">
 					<h1 class="wow fadeIn" data-wow-duration="4s">
 						Follow your heart.<br /> Follow your mood.
@@ -98,41 +143,27 @@
 
 					<div class="courses pt-20">
 						<form action="MoodPageServlet">
-							<button type="submit" name="mood-btn" value="cheerful"
-								data-wow-duration="1s" data-wow-delay=".3s"
-								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
-								style="font-size: 18px; height: 40px;">Cheeful
-								&#128516;</button>
-
-							<button type="submit" name="mood-btn" value="excited"
-								data-wow-duration="1s" data-wow-delay=".6s"
-								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
-								style="font-size: 18px; height: 40px;">Excited
-								&#128541;</button>
-							<button type="submit" name="mood-btn" value="romantic"
-								data-wow-duration="1s" data-wow-delay=".9s"
-								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
-								style="font-size: 18px; height: 40px;">Romantic
-								&#128536;</button>
-							<button type="submit" name="mood-btn" value="tense"
-								data-wow-duration="1s" data-wow-delay="1.2s"
-								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
-								style="font-size: 18px; height: 40px;">Tense &#128534;
+							<button type="submit" name="mood-btn" onclick="sendEmotion('Cheerful &#128516')" value="cheerful" data-wow-duration="1s" data-wow-delay=".3s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
+								Cheerful &#128516;
 							</button>
-							<button type="submit" name="mood-btn" value="anxious"
-								data-wow-duration="1s" data-wow-delay="1.5s"
-								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
-								style="font-size: 18px; height: 40px;">Anxious
-								&#128552;</button>
-							<button type="submit" name="mood-btn" value="angry"
-								data-wow-duration="1s" data-wow-delay="1.8s"
-								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
-								style="font-size: 18px; height: 40px;">Angry &#128545;
+							
+							<button type="submit" name="mood-btn" onclick="sendEmotion('Excited &#128541')" value="excited" data-wow-duration="1s" data-wow-delay=".6s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
+								Excited &#128541;
 							</button>
-							<button type="submit" name="mood-btn" value="lonely"
-								data-wow-duration="1s" data-wow-delay="2.1s"
-								class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
-								style="font-size: 18px; height: 40px;">Lonely &#128546;
+							<button type="submit" name="mood-btn" onclick="sendEmotion('Romantic &#128536')" value="romantic" data-wow-duration="1s" data-wow-delay=".9s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
+								Romantic &#128536;
+							</button>
+							<button type="submit" name="mood-btn" onclick="sendEmotion('Tense &#128534')" value="tense" data-wow-duration="1s" data-wow-delay="1.2s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;"> 
+								Tense &#128534;
+							</button>
+							<button type="submit" name="mood-btn" onclick="sendEmotion('Anxious &#128552')" value="anxious" data-wow-duration="1s" data-wow-delay="1.5s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
+								Anxious &#128552;
+							</button>
+							<button type="submit" name="mood-btn" onclick="sendEmotion('Angry &#128545')" value="angry" data-wow-duration="1s" data-wow-delay="1.8s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
+								Angry &#128545;
+							</button>
+							<button type="submit" name="mood-btn" onclick="sendEmotion('Lonely &#128546')" value="lonely" data-wow-duration="1s" data-wow-delay="2.1s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
+								Lonely &#128546;
 							</button>
 						</form>
 					</div>
