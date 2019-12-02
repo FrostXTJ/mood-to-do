@@ -69,7 +69,13 @@
 	}
 	
 	function sendEmotion(emo){
-		socket.send("Guest is feeling " + emo);
+	<%
+		String name = "Guest";
+		if ((User) session.getAttribute("user") != null) {
+			name = ((User) session.getAttribute("user")).getUsername();
+		}
+	%>
+		socket.send("<%=name%> is feeling " + emo);
 		console.log(emo);
 		return false;
 	}
