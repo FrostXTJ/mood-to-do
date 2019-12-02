@@ -1,11 +1,18 @@
 package MoodToDo;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import TMDB.TMDBQuery;
+import general.Entry;
+import general.Query;
 
 /**
  * Servlet implementation class MoodPageServlet
@@ -26,7 +33,22 @@ public class MoodPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("mood-btn"));
+		response.setContentType("text/html");
+		System.out.println("MoodPage Servlet in action.");
+		String moodKeyword = request.getParameter("mood-btn");
+		
+		// ADD USER INFO HERE
+		System.out.println("Mood " + moodKeyword + " was selected by user .");
+		// CONCURRENT BROADCASTING
+		
+		Query tmdbQuery = new TMDBQuery(moodKeyword);
+		ArrayList<Entry> movies = tmdbQuery.execute(); 
+		
+		request.setAttribute("movies", movies);
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/resultPage.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 	/**
