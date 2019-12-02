@@ -1,0 +1,52 @@
+.main-bloc {
+	align: middle;
+	padding: 50px;
+	color: #8D8D8D;
+}
+
+.username-text {
+	font-size: 16px;
+	padding-bottom: 10px;
+}
+
+.password-text {
+	font-size: 16px;
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+
+#username-input {
+	width:1200px;
+	height:30px;
+    font-size: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.password-input {
+	width:1200px;
+	height:30px;
+    font-size: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.submit-bloc {
+	padding-top: 40px;
+}
+
+#submit-button {
+	width:1225px;
+	height:40px;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: #C4C4C4;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+
+.error-message {
+	color: #FF0000;
+	padding-bottom: 10px;
+}

@@ -1,3 +1,4 @@
+<%@page import="general.User"%>
 <%@page import="general.Entry"%>
 <%@page import="TMDB.Movie"%>
 <%@page import="java.util.ArrayList"%>
@@ -124,22 +125,29 @@
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
+					<a href="index.html"><img src="" alt="" title="" /></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li><a href="index.jsp">Home</a></li>
-						<li><a href="about.html">About</a></li>
-						<li class="menu-active"><a href="courses.html">Courses</a></li>
-						<li class="menu-has-children"><a href="">Pages</a>
+						<li class="menu-active"><a href="index.jsp">Home</a></li>
+						<%
+							User user = (User) session.getAttribute("user");
+							if (user == null) {
+						%>
+						<li><a href="RegisterPage.jsp">Sign Up</a></li>
+						<li><a href="LoginPage.jsp">Log In</a></li>
+						<%
+							} else {
+						%>
+						<li><a href="index.jsp" onclick="signout();">Sign Out</a></li>
+						<%
+							}
+						%>
+						<li class="menu-has-children"><a href="">Setting</a>
 							<ul>
-								<li><a href="elements.html">Elements</a></li>
+								<li><a href="#">Elements</a></li>
 							</ul></li>
-						<li class="menu-has-children"><a href="">Blog</a>
-							<ul>
-								<li><a href="blog-home.html">Blog Home</a></li>
-								<li><a href="blog-single.html">Blog Details</a></li>
-							</ul></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="#">Contact</a></li>
 					</ul>
 				</nav>
 				<!-- #nav-menu-container -->
@@ -326,6 +334,14 @@
 		<a title="Go to Top" href="#"></a>
 	</div>
 	<!-- ####################### End Scroll to Top Area ####################### -->
+
+	<script>
+	function signout() {
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "SuedoSignoutServlet", false);
+		xhr.send();
+	}
+	</script>
 
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
 	<script>
