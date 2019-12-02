@@ -114,7 +114,7 @@ public class TMDBQuery implements Query {
 			
 			
 			// Parse API's results
-			for (int i = 0; i < 6; i++) {
+			for (int i = 0; i < 9; i++) {
 				JsonObject result = resultJsonArray.get(i).getAsJsonObject();
 				
 				String movieTitle = result.get("title").getAsString();
