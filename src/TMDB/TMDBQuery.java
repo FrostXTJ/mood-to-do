@@ -120,7 +120,7 @@ public class TMDBQuery implements Query {
 				String movieTitle = result.get("title").getAsString();
 				String posterPath = "https://image.tmdb.org/t/p/original" 
 						+ result.get("poster_path").getAsString();
-				String description = result.get("overview").getAsString();
+				String description = result.get("overview").getAsString().replace("\"", " ").replace("\'", " ");
 				ArrayList<String> genres = new ArrayList<String>();
 				for (JsonElement element : result.getAsJsonArray("genre_ids")) {
 					genres.add(GenreIdMapping.getGenre(element.getAsInt()));
