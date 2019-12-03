@@ -330,11 +330,11 @@
 			var modal = document.getElementById("myModal");
 			
 			var thumbnailPath = "<img style='height: 300px' src=<%= thumbnailPath %>><img/>";
-			var title = "<h5><%= name %></h5>"
-			var description = "<b>Overview:</b> <%= description %><br />"
-			var genres = "<b>Genres:</b> <%= genres %><br />"
-			var releaseDate = "<b>Release Date:</b> <%= releaseDate %><br />"
-			var rating = "<b>Rating:</b> <%= rating %><br />"
+			var title = "<h5><%= name %></h5>";
+			var description = "<b>Overview:</b> <%= description %><br />";
+			var genres = "<b>Genres:</b> <%= genres %><br />";
+			var releaseDate = "<b>Release Date:</b> <%= releaseDate %><br />";
+			var rating = "<b>Rating:</b> <%= rating %><br />";
 			
 			$("#thumbnail-bloc").html(thumbnailPath);
 			$("#info-bloc").html(title + description + genres + releaseDate + rating);
