@@ -39,6 +39,19 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <style>
+.buttonLink{
+	color: white;
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	font-size: 13px;
+	margin-left: 15px;
+	font-weight: 700;
+	display: inline-block;
+	
+	cursor: pointer;
+}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
@@ -86,14 +99,22 @@ function val() {
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
 						<li class="menu-active"><a href="index.jsp">Home</a></li>
-						<li><a href="#">Username</a></li>
-						<li><a href="index.jsp">Log Out</a></li>
-						<li class="menu-has-children"><a href="">Setting</a>
-							<ul>
-								<li><a href="#">Elements</a></li>
-							</ul>
-						</li>
-						<li><a href="#">Contact</a></li>
+						<%
+							if(session.getAttribute("user") == null){
+						%>		
+								<li><a href= "RegistserPage.jsp">Sign Up</a></li>
+								<li><a href= "LoginPage.jsp" >Log In</a></li>
+						<%	} else{
+						%>	
+							<form action = "SuedoSignoutServlet" method = "POST" name = "LogoutForm">
+								<li><button type = "submit" class = buttonlink">Logout</button></li>
+							</form>
+							
+							<li><a href = "Favorites.jsp">Favorites</a></li>
+						<%
+							}
+						%>
+						<li><a href = "Profile.jsp">Profile</a>
 					</ul>
 				</nav><!-- #nav-menu-container -->
 			</div>
