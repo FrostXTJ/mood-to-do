@@ -61,7 +61,8 @@
 				text-transform: uppercase;
 			}
 		}
-	
+		
+		
 	
 	</style>
 	
@@ -100,8 +101,7 @@
 		console.log(emo);
 		return false;
 	}
-	</script>	
-	
+	</script>
 </head>
 
 <body onload="connectToServer()">
@@ -132,6 +132,7 @@
 							
 						
 						<li><a href="Favorites.jsp">Favorites</a></li>
+						
 						<%
 							}
 						%>
@@ -147,8 +148,7 @@
 	<!-- Start Banner Area -->
 	<section class="home-banner-area relative">
 		<div class="container">
-		<!-- Other User Emo Display -->
-			<div id="mychat" data-wow-duration="1s" data-wow-delay=".3s" class="transparent mr-10 mb-10 wow fadeInDown" 
+		<div id="mychat" data-wow-duration="1s" data-wow-delay=".3s" class="transparent mr-10 mb-10 wow fadeInDown" 
 				style="font-size: 18px; height:40px; border:none; padding: 50px; color: white;">
 			</div>
 			<div class="row fullscreen d-flex align-items-center justify-content-center">

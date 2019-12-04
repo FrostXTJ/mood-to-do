@@ -114,6 +114,13 @@ public class addFavoriteServlet extends HttpServlet {
 						webpage = "/thankYouPage.jsp";
 					}
 					
+					/*
+					 * IF IT IS A MOVIE, ADD IT TO THE movies TABLE AS WELL !!!!!!!!!!!
+					 * aw shit but then u gotta pass in all the extraneous shit
+					 * 
+					 * 
+					 */
+					
 			
 					if (results != null) {
 						results.close();

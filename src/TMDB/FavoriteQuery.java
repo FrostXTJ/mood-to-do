@@ -97,7 +97,7 @@ public class FavoriteQuery{
 					URL apiUrl = null;
 					HttpURLConnection connection = null;
 					String resultString = "";
-					apiUrl = new URL(apiStart + links.get(i)+ apiKey);
+					apiUrl = new URL(apiStart + links.get(i) + apiKey);
 					System.out.println(links.get(i));
 					System.out.println(apiUrl);
 					connection = (HttpURLConnection)apiUrl.openConnection();
@@ -111,29 +111,34 @@ public class FavoriteQuery{
 					@SuppressWarnings("deprecation")
 					JsonParser jsonParser = new JsonParser();
 					@SuppressWarnings("deprecation")
-					JsonArray resultJsonArray = jsonParser.parse(resultString).getAsJsonObject().getAsJsonArray("results");
-		
+					JsonObject resultJsonArray = jsonParser.parse(resultString).getAsJsonObject();
+					
 					// Parse API's results
-					if(resultJsonArray != null && resultJsonArray.size() > 0) {
-						
-						for (int j = 0; j < 1; j++) {
-							JsonObject result = resultJsonArray.get(i).getAsJsonObject();
-							
+					if(resultJsonArray != null) {
+							JsonObject result = resultJsonArray;
 							String movieTitle = result.get("title").getAsString();
 							String posterPath = "https://image.tmdb.org/t/p/original" 
 									+ result.get("poster_path").getAsString();
 							String description = result.get("overview").getAsString();
 							ArrayList<String> genres = new ArrayList<String>();
-							for (JsonElement element : result.getAsJsonArray("genre_ids")) {
-								genres.add(GenreIdMapping.getGenre(element.getAsInt()));
+							
+							JsonArray myGenres = result.getAsJsonArray("genres");
+							for(int m = 0; m < myGenres.size(); m++) {
+								Object obj = myGenres.get(m);
+								JsonObject object = (JsonObject) obj;
+								String gen = object.get("name").getAsString();
+								genres.add(gen);
 							}
+							
+							
+							
 							String releaseDate = result.get("release_date").getAsString();
 							float rating = result.get("vote_average").getAsFloat();
 							String id = result.get("id").getAsString();
 							System.out.println(movieTitle);
 							queryResults.add(new Movie(movieTitle, posterPath, description, genres, releaseDate, rating, id));
 						}
-					}
+					
 					
 					br.close();
 				}
@@ -175,6 +180,7 @@ public class FavoriteQuery{
 								String posterPath = result.get("artworkUrl100").getAsString();
 								String description = result.get("artistName").getAsString();
 								ArrayList<String> genres = new ArrayList<String>();
+								
 								genres.add(result.get("primaryGenreName").getAsString());
 								String releaseDate = result.get("collectionName").getAsString();
 								float rating = 0;

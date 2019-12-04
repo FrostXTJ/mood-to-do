@@ -50,13 +50,13 @@
 
 <style>
 #subButton {
-	background-color: white;
-	color: #39cfca;
-	border: 1px solid grey;
-	margin-top: 10px;
-	border-radius: 10px;
-}
-
+			background-color: white;
+			color: #39cfca;
+			border: 1px solid grey;
+			margin-top: 10px;
+			border-radius: 10px;
+		}
+		
 .modal {
 	display: none;
 	position: fixed;
@@ -99,28 +99,29 @@
 	cursor: pointer;
 }
 
-#calculating {
+#calculating{
 	display: none;
 }
-
-.buttonLink {
-	color: white;
-	padding: 0;
-	background-color: transparent;
-	border: none;
-	outline: none;
-	font-size: 13px;
-	margin-left: 15px;
-	font-weight: 700;
-	display: inline-block;
-	cursor: pointer;
-}
-
-@media ( max-width : 800px) {
 	.buttonLink {
-		text-transform: uppercase;
-	}
-}
+			color: white;
+			padding: 0;
+			background-color: transparent;
+			border: none;
+    		outline: none;
+    		font-size: 13px;
+    		margin-left: 15px;
+    		font-weight: 700;
+    		display: inline-block;
+    		
+    		cursor: pointer;
+		}
+		
+		@media (max-width: 800px){
+			.buttonLink {
+				text-transform: uppercase;
+			}
+		}
+		
 </style>
 
 <!-- Web Socket Script -->
@@ -168,7 +169,8 @@
 	<header id="header">
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
-				<div id="logo"></div>
+				<div id="logo">
+				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
 						<li><a href="index.jsp">Home</a></li>
@@ -181,17 +183,17 @@
 						<%
 							} else {
 						%>
-						<form action="SuedoSignoutServlet" method="POST" name="logoutForm">
-							<li><button type="submit" class="buttonLink">Logout</button></li>
+						<form action ="SuedoSignoutServlet" method="POST" name="logoutForm">
+							<li><button type="submit" class= "buttonLink">Logout</button></li>
 						</form>
-
-
-
+							
+							
+						
 						<li><a href="Favorites.jsp">Favorites</a></li>
 						<%
 							}
 						%>
-
+						
 					</ul>
 				</nav>
 				<!-- #nav-menu-container -->
@@ -199,7 +201,7 @@
 		</div>
 	</header>
 	<!-- End Header Area -->
-
+	
 	<% 
 		ArrayList<Entry> movies = (ArrayList<Entry>)request.getAttribute("movies");
 		System.out.println("movie size:" + movies.size());
@@ -212,8 +214,7 @@
 	<!-- Start Banner Area -->
 	<section class="banner-area relative">
 		<div class="container">
-		<!-- Other User Emo Display -->
-			<div id="mychat" data-wow-duration="1s" data-wow-delay=".3s" class="transparent mr-10 mb-10 wow fadeInDown" 
+		<div id="mychat" data-wow-duration="1s" data-wow-delay=".3s" class="transparent mr-10 mb-10 wow fadeInDown" 
 				style="font-size: 18px; height:40px; border:none; padding: 50px; color: white;">
 			</div>
 			<div class="row d-flex align-items-center justify-content-center">
@@ -222,50 +223,45 @@
 					<br /> <br /> <br />
 					<form action="MoodPageServlet">
 						<input type="hidden" name="type" value="movies">
-						<button type="submit" name="mood-btn"
-							onclick="sendEmotion('Cheerful &#128516')" value="cheerful"
+						<button type="submit" name="mood-btn" onclick="sendEmotion('Cheerful &#128516')" value="cheerful"
 							data-wow-duration="1s" data-wow-delay=".3s"
 							class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
-							style="font-size: 18px; height: 40px;">Cheerful
-							&#128516;</button>
+							style="font-size: 18px; height: 40px;">Cheerful &#128516;
+						</button>
 
-						<button type="submit" name="mood-btn"
-							onclick="sendEmotion('Excited &#128541')" value="excited"
+						<button type="submit" name="mood-btn" onclick="sendEmotion('Excited &#128541')" value="excited"
 							data-wow-duration="1s" data-wow-delay=".6s"
 							class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
 							style="font-size: 18px; height: 40px;">Excited &#128541;
 						</button>
-						<button type="submit" name="mood-btn"
-							onclick="sendEmotion('Romantic &#128536')" value="romantic"
+						<button type="submit" name="mood-btn" onclick="sendEmotion('Romantic &#128536')" value="romantic"
 							data-wow-duration="1s" data-wow-delay=".9s"
 							class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
 							style="font-size: 18px; height: 40px;">Romantic
 							&#128536;</button>
-						<button type="submit" name="mood-btn"
-							onclick="sendEmotion('Tense &#128534')" value="tense"
+						<br /> <br />
+						<button type="submit" name="mood-btn" onclick="sendEmotion('Tense &#128534')" value="tense"
 							data-wow-duration="1s" data-wow-delay="1.2s"
 							class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
 							style="font-size: 18px; height: 40px;">Tense &#128534;</button>
-						<button type="submit" name="mood-btn"
-							onclick="sendEmotion('Anxious &#128552')" value="anxious"
+						<button type="submit" name="mood-btn" onclick="sendEmotion('Anxious &#128552')" value="anxious"
 							data-wow-duration="1s" data-wow-delay="1.5s"
 							class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
 							style="font-size: 18px; height: 40px;">Anxious &#128552;
 						</button>
-						<button type="submit" name="mood-btn"
-							onclick="sendEmotion('Angry &#128545')" value="angry"
+						<button type="submit" name="mood-btn" onclick="sendEmotion('Angry &#128545')" value="angry"
 							data-wow-duration="1s" data-wow-delay="1.8s"
 							class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
 							style="font-size: 18px; height: 40px;">Angry &#128545;</button>
 						<button type="submit" name="mood-btn"
-							onclick="sendEmotion('Lonely &#128546')" value="lonely"
+							onclick="sendEmotion('Lonely &#128546')" value="lonely" 
 							data-wow-duration="1s" data-wow-delay="2.1s"
 							class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
 							style="font-size: 18px; height: 40px;">Lonely &#128546;
 						</button>
 				</div>
+				</div>
 			</div>
-		</div>
 		</div>
 		<div class="rocket-img">
 			<img src="img/rocket.png" alt="">
@@ -273,8 +269,8 @@
 	</section>
 	<!-- End Banner Area -->
 
-
-
+	
+	
 
 	<!--Start Result Area -->
 	<section class="feature-area">
@@ -284,68 +280,63 @@
 					<div class="section-title text-center">
 						<h1>We give recommendations based on your mood.</h1>
 						<%if (type.equals("movies")) { %>
-						<p>Here are some movies we recommend for you.</p>
+							<p>Here are some movies we recommend for you.</p>
 						<%}else{ %>
-						<p>Here are some songs we recommend for you.</p>
+							<p>Here are some songs we recommend for you.</p>
 						<% } %>
-
+						
 						</form>
-						<div id="favForm">
-							<form action="MoodPageServlet">
-								<input type="hidden" name="mood-btn" value=<%=mood%>>
-								<div id="radio-buttons">
-									<input type="radio" name="type" value="movies"> Movies
-									<input type="radio" name="type" value="restaurants">
-									Restaurants <input type="radio" name="type" value="music">
-									Music
-								</div>
-								<button id="subButton" type="submit">View
-									recommendations for this type!</button>
-								<div id="calculating">Calculating...</div>
-							</form>
+					<div id="favForm">
+					<form action="MoodPageServlet">
+						<input type="hidden" name="mood-btn" value=<%=mood%>>
+						<div id="radio-buttons">
+							<input type="radio" name="type" value="movies"> Movies
+							<input type="radio" name="type" value="music"> Music
 						</div>
+						<button id="subButton" type="submit">View recommendations for this type!</button>
+						<div id="calculating">Calculating...</div>
+					</form>
 					</div>
 				</div>
-				<div class="feature-inner row">
-					<%
+			</div>
+		<div class="feature-inner row">
+				<%
 					for (int i = 0; i < movies.size(); i++) {
 				%>
-					<div class="col-lg-4 col-md-6">
-						<div class="feature-item">
-							<button style="background: none; border: none;"
-								onclick="showMovieModal<%= i %>();">
-								<img style='height: 200px'
-									src=<%=movies.get(i).getThumbnailPath()%>> </img>
-							</button>
+				<div class="col-lg-4 col-md-6">
+					<div class="feature-item">
+						<button style="background: none; border: none;" onclick="showMovieModal<%= i %>();">
+							<img style='height: 200px'
+								src=<%=movies.get(i).getThumbnailPath()%>>
+							</img>
+						</button>
 
-							<h4><%=movies.get(i).getName()%></h4>
-							<div class="wow fadeIn" data-wow-duration="1s"
-								data-wow-delay=".1s">
-								<p>
-									<%=movies.get(i).getDescription()%>
-								</p>
-								<%
+						<h4><%=movies.get(i).getName()%></h4>
+						<div class="wow fadeIn" data-wow-duration="1s"
+							data-wow-delay=".1s">
+							<p>
+								<%=movies.get(i).getDescription()%>
+							</p>
+							<%
 								
 								if(session.getAttribute("user") != null){
 							%>
-								<form action="addFavoriteServlet">
-									<input type="hidden" name="link"
-										value=<%=movies.get(i).getID()%>> <input type="hidden"
-										name="movies" value=<%=movies%>> <input type="hidden"
-										name="user"
-										value=<%=session.getAttribute("user").toString() %>> <input
-										type="hidden" name="type" value=<%=type %>>
-									<button class="favButton" type="submit">Favorite</button>
-								</form>
-								<% } %>
-							</div>
+							<form action="addFavoriteServlet">
+								<input type="hidden" name="link" value=<%=movies.get(i).getID()%>>
+								<input type="hidden" name="movies" value=<%=movies%>>
+								<input type="hidden" name="user" value=<%=session.getAttribute("user").toString() %>> 
+								<input type="hidden" name="type" value=<%=type %>> 
+								<button class="favButton" type="submit">Favorite</button>
+							</form>
+							<% } %>
 						</div>
 					</div>
-					<%
+				</div>
+				<%
 					}
 				%>
-				</div>
-			</div>
+			</div>	
+		</div>
 	</section>
 	<!-- End Result Area -->
 
@@ -394,134 +385,134 @@
 	<div id="myModal" class="modal">
 		<!-- Modal content -->
 		<div class="modal-content">
-			<span class="close" onclick()="">&times;</span>
+			<span class="close" onclick() = "">&times;</span>
 			<div>
-				<table class="book-table">
+				<table class="book-table" >
 					<tr>
 						<td valign="top">
-							<div id="thumbnail-bloc" style="padding-left: 150px;"></div>
-							<br />
+							<div id="thumbnail-bloc" style="padding-left: 150px;"></div><br/>
 							<div id="fav-button-bloc"></div>
 						</td>
 						<td valign="top">
-							<div id="info-bloc"
-								style="padding-left: 70px; padding-top: 70px;"></div>
+							<div id="info-bloc" style="padding-left: 70px; padding-top: 70px;"></div>
 						</td>
 					</tr>
-					</div>
-					</div>
+			</div>
+		</div>
 
-					</div>
+	</div>
 
-					<!-- ####################### Start Scroll to Top Area ####################### -->
-					<div id="back-top">
-						<a title="Go to Top" href="#"></a>
-					</div>
-					<!-- ####################### End Scroll to Top Area ####################### -->
+	<!-- ####################### Start Scroll to Top Area ####################### -->
+	<div id="back-top">
+		<a title="Go to Top" href="#"></a>
+	</div>
+	<!-- ####################### End Scroll to Top Area ####################### -->
 
-					<script src="js/vendor/jquery-2.2.4.min.js"></script>
-
-					<script>
+	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	
+	<script>
 	function signout() {
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "SuedoSignoutServlet", false);
 		xhr.send();
 	}
 	</script>
-
-					<script>
-		$("#subButton").on("click", function(){
-			$("#calculating").fadeIn();
-		});
 	
-		var modal = document.getElementById("myModal");
-		var span = document.getElementsByClassName("close")[0];
-		
-		span.onclick = function() {
+	<script>
+	$("#subButton").on("click", function(){
+		$("#calculating").fadeIn();
+	});
+
+	var modal = document.getElementById("myModal");
+	var span = document.getElementsByClassName("close")[0];
+	
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+	
+	window.onclick = function(event) {
+		if (event.target == modal) {
 			modal.style.display = "none";
 		}
-		
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
+	}
+	
+	<%
+		for (int i = 0; i < movies.size(); i++) {
+			Movie movie = (Movie)movies.get(i);
+			String name = movie.getName();
+			String thumbnailPath = movie.getThumbnailPath();
+			String description = movie.getDescription();
+			String genres = "";
+			for (String genre : movie.getGenres()) {
+				genres += genre + ", ";  
 			}
-		}
+			genres = genres.substring(0, genres.length() - 2);
+			String releaseDate = movie.getReleaseDate();
+			float rating = movie.getRating();
+	%>	
+	function showMovieModal<%= i %>() {
 		
-		<%
-			for (int i = 0; i < movies.size(); i++) {
-				Movie movie = (Movie)movies.get(i);
-				String name = movie.getName();
-				String thumbnailPath = movie.getThumbnailPath();
-				String description = movie.getDescription();
-				String genres = "";
-				for (String genre : movie.getGenres()) {
-					genres += genre + ", ";  
-				}
-				genres = genres.substring(0, genres.length() - 2);
-				String releaseDate = movie.getReleaseDate();
-				float rating = movie.getRating();
-		%>	
-		function showMovieModal<%= i %>() {
-			
-			var modal = document.getElementById("myModal");
-			
-			var thumbnailPath = "<img style='height: 200px' src=<%= thumbnailPath %>><img/>";
-			var title = "<h5><%=name%></h5>"
-			<%if (type.equals("movies")) {%>
-				var description = "<b>Overview:</b> <%=description%><br />"
-			<%} else {%>
-				var description = "<b>Artist:</b> <%=description%><br />"
-			<%}%>
-			var genres = "<b>Genres:</b> <%=genres%><br />"
-			<%if (type.equals("movies")) {%>
-			var releaseDate = "<b>Release Date:</b> <%=releaseDate%><br />"
-			<%} else {%>
-				var releaseDate = "<b>Album Title:</b> <%=releaseDate%><br />"
-			<%}%>
-			<%if (type.equals("movies")) {%>
-				var rating = "<b>Rating:</b> <%=rating%><br />"
-			<%}%>
+		var modal = document.getElementById("myModal");
 		
-			//var btn = document.createElement("BUTTON");
-			//btn.textContent = "Favorite";
-			//btn.classList.add("favButton");
-			
-			$("#thumbnail-bloc").html(thumbnailPath);
-			<%if (type.equals("movies")) {%>
-				$("#info-bloc").html(title + description + genres + releaseDate + rating);
-				//$("#info-bloc").append(btn);
-			<%} else {%>
-				$("#info-bloc").html(title + description + genres + releaseDate);
-				//$("#info-bloc").append(btn);
-			<%}%>
-			modal.style.display = 'block';
-		}
+		var thumbnailPath = "<img style='height: 200px' src=<%= thumbnailPath %>><img/>";
+		var title = "<h5><%=name%></h5>"
+		<%if (type.equals("movies")) {%>
+			var description = "<b>Overview:</b> <%=description%><br />"
+		<%} else {%>
+			var description = "<b>Artist:</b> <%=description%><br />"
 		<%}%>
+		var genres = "<b>Genres:</b> <%=genres%><br />"
+		<%if (type.equals("movies")) {%>
+		var releaseDate = "<b>Release Date:</b> <%=releaseDate%><br />"
+		<%} else {%>
+			var releaseDate = "<b>Album Title:</b> <%=releaseDate%><br />"
+		<%}%>
+		<%if (type.equals("movies")) {%>
+			var rating = "<b>Rating:</b> <%=rating%><br />"
+		<%}%>
+	
+		//var btn = document.createElement("BUTTON");
+		//btn.textContent = "Favorite";
+		//btn.classList.add("favButton");
+		
+		$("#thumbnail-bloc").html(thumbnailPath);
+		<%if (type.equals("movies")) {%>
+			$("#info-bloc").html(title + description + genres + releaseDate + rating);
+			//$("#info-bloc").append(btn);
+		<%} else {%>
+			$("#info-bloc").html(title + description + genres + releaseDate);
+			//$("#info-bloc").append(btn);
+		<%}%>
+		modal.style.display = 'block';
+	}
+		<%
+			}
+		%>
 	</script>
 
 
-					<script
-						src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-						integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-						crossorigin="anonymous"></script>
-					<script src="js/vendor/bootstrap.min.js"></script>
-					<script type="text/javascript"
-						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-					<script src="js/easing.min.js"></script>
-					<script src="js/hoverIntent.js"></script>
-					<script src="js/superfish.min.js"></script>
-					<script src="js/jquery.ajaxchimp.min.js"></script>
-					<script src="js/jquery.magnific-popup.min.js"></script>
-					<script src="js/owl.carousel.min.js"></script>
-					<script src="js/owl-carousel-thumb.min.js"></script>
-					<script src="js/jquery.sticky.js"></script>
-					<script src="js/jquery.nice-select.min.js"></script>
-					<script src="js/parallax.min.js"></script>
-					<script src="js/waypoints.min.js"></script>
-					<script src="js/wow.min.js"></script>
-					<script src="js/jquery.counterup.min.js"></script>
-					<script src="js/mail-script.js"></script>
-					<script src="js/main.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script src="js/easing.min.js"></script>
+	<script src="js/hoverIntent.js"></script>
+	<script src="js/superfish.min.js"></script>
+	<script src="js/jquery.ajaxchimp.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/owl-carousel-thumb.min.js"></script>
+	<script src="js/jquery.sticky.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/parallax.min.js"></script>
+	<script src="js/waypoints.min.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/jquery.counterup.min.js"></script>
+	<script src="js/mail-script.js"></script>
+	<script src="js/main.js"></script>
 </body>
 
 </html>

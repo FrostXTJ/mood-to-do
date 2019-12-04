@@ -130,7 +130,6 @@
 					<form action="favoritePageServlet">
 					<div id="radio-buttons">
 						<input type="radio" name="type" value="movies"> Movies
-						<input type="radio" name="type" value="restaurants"> Restaurants
 						<input type="radio" name="type" value="music"> Music
 						</div>
 						<button id="subButton" type=submit>View your Favorites!</button>
