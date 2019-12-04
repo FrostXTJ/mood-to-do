@@ -63,7 +63,10 @@ td, th {
 <script>
 <%
 	//Still need to add a way to get the username either from database or from their session
-	String username = "Username";
+	String username = (String)session.getAttribute("user");
+	if(username == null){
+		username = "Guest";
+	}
 	String button = "addPreferences";
 	String prefChange = "Preferences.jsp";
 	String SignUp = username;
