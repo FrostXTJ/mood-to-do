@@ -82,9 +82,11 @@ td, th {
 	}
 	String button = "addPreferences";
 	String prefChange = "Preferences.jsp";
-	String notification = request.getParameter("notification");
 	
+	String notification = request.getParameter("notification");
 	String showRFilms = request.getParameter("showRFilms");
+	String showExSongs = request.getParameter("showExSongs");
+	
 	String excludeAction = request.getParameter("excludeAction");
 	String excludeAdventure = request.getParameter("excludeAdventure");
 	String excludeAnimation = request.getParameter("excludeAnimation");
@@ -104,7 +106,6 @@ td, th {
 	String excludeWar = request.getParameter("excludeWar");
 	String excludeWestern = request.getParameter("excludeWestern");
 	
-	String showExSongs = request.getParameter("showExSongs");
 	String excludeBlues = request.getParameter("excludeBlues");
 	String excludeSoComedy = request.getParameter("excludeSoComedy");
 	String excludeClassic = request.getParameter("excludeClassic");
