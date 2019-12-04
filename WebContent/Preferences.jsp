@@ -211,6 +211,13 @@ function val() {
 							</td>
 						</tr>																
 						</table>
+						<%
+							String username = (String)session.getAttribute("user");
+							if(username == null){
+								username = "Guest";
+							}
+						%>
+						<input type = "text" name="username" value= <%=username %> disabled><br>			
 						<input type = "submit" class = "submitPref" value = "Submit" />
 						</form>
 					<div class="courses pt-20"> 
