@@ -39,6 +39,19 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <style>
+.buttonLink{
+	color: white;
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	font-size: 13px;
+	margin-left: 15px;
+	font-weight: 700;
+	display: inline-block;
+	
+	cursor: pointer;
+}	
 .addPreferences{
 	color: white;
 }
@@ -69,8 +82,6 @@ td, th {
 	}
 	String button = "addPreferences";
 	String prefChange = "Preferences.jsp";
-	String SignUp = username;
-	String In_Out = "Log Out";
 	String notification = request.getParameter("notification");
 	
 	String showRFilms = request.getParameter("showRFilms");
@@ -121,9 +132,6 @@ td, th {
 		listofFilmExcludes = "None";
 		showExSongs = "No";
 		listofSongExcludes = "None";
-		SignUp = "Sign Up";
-		In_Out = "Log In";
-		
 	}
 	else{
 			if(notification == null){
@@ -408,14 +416,22 @@ td, th {
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
 						<li class="menu-active"><a href="index.jsp">Home</a></li>
-						<li><a href="#"><%=SignUp %></a></li>
-						<li><a href="#"><%=In_Out %></a></li>
-						<li class="menu-has-children"><a href="">Setting</a>
-							<ul>
-								<li><a href="#">Elements</a></li>
-							</ul>
-						</li>
-						<li><a href="#">Contact</a></li>
+						<%
+							if(session.getAttribute("user") == null){
+						%>		
+								<li><a href= "RegistserPage.jsp">Sign Up</a></li>
+								<li><a href= "LoginPage.jsp" >Log In</a></li>
+						<%	} else{
+						%>	
+							<form action = "SuedoSignoutServlet" method = "POST" name = "LogoutForm">
+								<li><button type = "submit" class = buttonlink">Logout</button></li>
+							</form>
+							
+							<li><a href = "Favorites.jsp">Favorites</a></li>
+						<%
+							}
+						%>
+							<li><a href = "Profile.jsp">Profile</a>		
 					</ul>
 				</nav><!-- #nav-menu-container -->
 			</div>
