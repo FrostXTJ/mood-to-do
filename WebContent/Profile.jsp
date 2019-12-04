@@ -284,100 +284,99 @@ td, th {
 			else{
 				if(excludeBlues != null){
 					listofSongExcludes += excludeBlues;
-					if(excludeSoComedy != null && excludeClassic != null && excludeCountry != null && excludeElectronic != null && excludeHoliday != null
-							&& excludeJazz != null && excludePop != null && excludeRB_Soul != null && excludeDance != null && excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeSoComedy != null || excludeClassic != null || excludeCountry != null || excludeElectronic != null || excludeHoliday != null
+							|| excludeJazz != null || excludePop != null || excludeRB_Soul != null || excludeDance != null || excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeSoComedy != null){
 					listofSongExcludes += excludeSoComedy;
-					if(excludeClassic != null && excludeCountry != null && excludeElectronic != null && excludeHoliday != null
-							&& excludeJazz != null && excludePop != null && excludeRB_Soul != null && excludeDance != null && excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeClassic != null || excludeCountry != null || excludeElectronic != null || excludeHoliday != null
+							|| excludeJazz != null || excludePop != null || excludeRB_Soul != null || excludeDance != null || excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeClassic!= null){
 					listofSongExcludes += excludeClassic;
-					if(excludeCountry != null && excludeElectronic != null && excludeHoliday != null
-							&& excludeJazz != null && excludePop != null && excludeRB_Soul != null && excludeDance != null && excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeCountry != null || excludeElectronic != null || excludeHoliday != null
+							|| excludeJazz != null || excludePop != null || excludeRB_Soul != null || excludeDance != null || excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeCountry!= null){
 					listofSongExcludes += excludeCountry;
-					if(excludeElectronic != null && excludeHoliday != null
-							&& excludeJazz != null && excludePop != null && excludeRB_Soul != null && excludeDance != null && excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeElectronic != null || excludeHoliday != null
+							|| excludeJazz != null || excludePop != null || excludeRB_Soul != null || excludeDance != null || excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeElectronic!= null){
 					listofSongExcludes += excludeElectronic;
-					if(excludeHoliday != null && excludeJazz != null && excludePop != null && excludeRB_Soul != null && excludeDance != null && excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeHoliday != null|| excludeJazz != null || excludePop != null || excludeRB_Soul != null || excludeDance != null || excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeHoliday!= null){
 					listofSongExcludes += excludeHoliday;
-					if(excludeJazz != null && excludePop != null && excludeRB_Soul != null && excludeDance != null && excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeJazz != null || excludePop != null || excludeRB_Soul != null || excludeDance != null || excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeJazz!= null){
 					listofSongExcludes += excludeJazz;
-					if(excludePop != null && excludeRB_Soul != null && excludeDance != null && excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludePop != null || excludeRB_Soul != null || excludeDance != null || excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ",";
 					}
 				}
 				if(excludePop!= null){
 					listofSongExcludes += excludePop;
-					if(excludeRB_Soul != null && excludeDance != null && excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeRB_Soul != null || excludeDance != null || excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeRB_Soul!= null){
 					listofSongExcludes += excludeRB_Soul;
-					if(excludeDance != null && excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeDance != null || excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeDance!= null){
 					listofSongExcludes += excludeDance;
-					if(excludeHipHop_Rap != null && excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeHipHop_Rap != null || excludeAlternative != null
+							|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeHipHop_Rap!= null){
 					listofSongExcludes += excludeHipHop_Rap;
-					if(excludeAlternative != null
-							&& excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeAlternative != null|| excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeAlternative != null){
 					listofSongExcludes += excludeAlternative;
-					if(excludeRock != null && excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeRock != null || excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeRock != null){
 					listofSongExcludes += excludeRock;
-					if(excludeReggae != null && excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeReggae != null || excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
 				if(excludeReggae != null){
 					listofSongExcludes += excludeReggae;
-					if(excludeInstrumental != null && excludeKaraoke != null){
+					if(excludeInstrumental != null || excludeKaraoke != null){
 						listofSongExcludes += ", ";
 					}
 				}
