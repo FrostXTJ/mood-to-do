@@ -33,6 +33,7 @@ public class Validate extends HttpServlet {
 		String notification = request.getParameter("notification");
 		String showRFilms = request.getParameter("showRFilms");
 		String showExSongs = request.getParameter("showExSongs");
+		//Still need to add a way to add the preferences to the database
 		Boolean correct = true;
 		if(notification == null || notification.isEmpty()) {
 			correct = false;
