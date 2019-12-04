@@ -62,6 +62,7 @@ td, th {
 </style>
 <script>
 <%
+	//Still need to add a way to get the username either from database or from their session
 	String username = "Username";
 	String button = "addPreferences";
 	String prefChange = "Preferences.jsp";
