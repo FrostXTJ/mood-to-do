@@ -12,37 +12,37 @@ CREATE TABLE TMDBMapping (
 
 # Mood cheerful
 INSERT INTO TMDBMapping (moodName, genreIds, genreNames) 
-	VALUES ('cheerful', '12|16', 
-    'adventure|animation');
+	VALUES ('cheerful', '28|12|16|35|18|14|878', 
+    'action|adventure|animation|comedy|drama|fantasy|science fiction');
 
 # Mood excited
 INSERT INTO TMDBMapping (moodName, genreIds, genreNames) 
-	VALUES ('excited', '28|27|37|53', 
-    'action|horror|western|thriller');
+	VALUES ('excited', '28|27|9648|37|53', 
+    'action|horror|mystery|western|thriller');
     
 # Mood romantic
 INSERT INTO TMDBMapping (moodName, genreIds, genreNames) 
-	VALUES ('romantic', '10749', 
-    'romance');
+	VALUES ('romantic', '16|14|10749', 
+    'animation|fantasy|romance');
 
 # Mood tense
 INSERT INTO TMDBMapping (moodName, genreIds, genreNames) 
-	VALUES ('tense', '10751|10402|10749', 
-    'family|music|romance');
+	VALUES ('tense', '18|10751|10402|10749', 
+    'drama|family|music|romance');
     
 # Mood anxious
 INSERT INTO TMDBMapping (moodName, genreIds, genreNames) 
-	VALUES ('anxious', '36|10402|37', 
-    'history|music|western');
+	VALUES ('anxious', '12|36|1040210749|37', 
+    'adventure|history|music|romance|western');
 
 # Mood angry
 INSERT INTO TMDBMapping (moodName, genreIds, genreNames) 
-	VALUES ('angry', '28|10752', 
-    'action|war');
+	VALUES ('angry', '28|27|10752', 
+    'action|horror|war');
     
 # Mood lonely
 INSERT INTO TMDBMapping (moodName, genreIds, genreNames) 
-	VALUES ('lonely', '10749|10751', 
-    'romance|family');
+	VALUES ('lonely', '16|18|10751|14|36|878', 
+    'animation|drama|family|fantasy|history|science fiction');
     
 SELECT * FROM TMDBMapping;

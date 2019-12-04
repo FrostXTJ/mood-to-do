@@ -49,6 +49,14 @@
 <link rel="stylesheet" href="css/custom.css">
 
 <style>
+#subButton {
+			background-color: white;
+			color: #39cfca;
+			border: 1px solid grey;
+			margin-top: 10px;
+			border-radius: 10px;
+		}
+		
 .modal {
 	display: none;
 	position: fixed;
@@ -70,6 +78,14 @@
 	width: 80%;
 }
 
+.favButton {
+	background-color: white;
+	color: #39cfca;
+	border: 1px solid grey;
+	margin-top: 10px;
+	border-radius: 10px;
+}
+
 .close {
 	color: #aaa;
 	float: right;
@@ -82,6 +98,30 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+
+#calculating{
+	display: none;
+}
+	.buttonLink {
+			color: white;
+			padding: 0;
+			background-color: transparent;
+			border: none;
+    		outline: none;
+    		font-size: 13px;
+    		margin-left: 15px;
+    		font-weight: 700;
+    		display: inline-block;
+    		
+    		cursor: pointer;
+		}
+		
+		@media (max-width: 800px){
+			.buttonLink {
+				text-transform: uppercase;
+			}
+		}
+		
 </style>
 
 </head>
@@ -93,29 +133,30 @@
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="index.html"><img src="" alt="" title="" /></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li class="menu-active"><a href="index.jsp">Home</a></li>
+						<li><a href="index.jsp">Home</a></li>
 						<%
-							User user = (User) session.getAttribute("user");
-							if (user == null) {
+						String user = null;
+						if(session.getAttribute("user") == null){
 						%>
 						<li><a href="RegisterPage.jsp">Sign Up</a></li>
 						<li><a href="LoginPage.jsp">Log In</a></li>
 						<%
 							} else {
 						%>
-						<li><a href="index.jsp" onclick="signout();">Sign Out</a></li>
+						<form action ="SuedoSignoutServlet" method="POST" name="logoutForm">
+							<li><button type="submit" class= "buttonLink">Logout</button></li>
+						</form>
+							
+							
+						
+						<li><a href="Favorites.jsp">Favorites</a></li>
 						<%
 							}
 						%>
-						<li class="menu-has-children"><a href="">Setting</a>
-							<ul>
-								<li><a href="#">Elements</a></li>
-							</ul></li>
-						<li><a href="#">Contact</a></li>
+						
 					</ul>
 				</nav>
 				<!-- #nav-menu-container -->
@@ -123,6 +164,14 @@
 		</div>
 	</header>
 	<!-- End Header Area -->
+	
+	<% 
+		ArrayList<Entry> movies = (ArrayList<Entry>)request.getAttribute("movies");
+		System.out.println("movie size:" + movies.size());
+		String mood = (String) request.getAttribute("mood");
+		String type = (String) request.getAttribute("type");
+								
+	%>
 
 
 	<!-- Start Banner Area -->
@@ -133,10 +182,11 @@
 					<h4 class="text-white">How do you feel right now?</h4>
 					<br /> <br /> <br />
 					<form action="MoodPageServlet">
+						<input type="hidden" name="type" value="movies">
 						<button type="submit" name="mood-btn" value="cheerful"
 							data-wow-duration="1s" data-wow-delay=".3s"
 							class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
-							style="font-size: 18px; height: 40px;">Cheeful &#128516;
+							style="font-size: 18px; height: 40px;">Cheerful &#128516;
 						</button>
 
 						<button type="submit" name="mood-btn" value="excited"
@@ -168,7 +218,7 @@
 							class="primary-btn transparent mr-10 mb-10 wow fadeInDown"
 							style="font-size: 18px; height: 40px;">Lonely &#128546;
 						</button>
-					</form>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -178,9 +228,8 @@
 	</section>
 	<!-- End Banner Area -->
 
-	<%
-		ArrayList<Entry> movies = (ArrayList<Entry>) request.getAttribute("movies");
-	%>
+	
+	
 
 	<!--Start Result Area -->
 	<section class="feature-area">
@@ -189,19 +238,37 @@
 				<div class="col-lg-8">
 					<div class="section-title text-center">
 						<h1>We give recommendations based on your mood.</h1>
-						<p>Here are some movies we recommend for you.</p>
+						<%if (type.equals("movies")) { %>
+							<p>Here are some movies we recommend for you.</p>
+						<%}else{ %>
+							<p>Here are some songs we recommend for you.</p>
+						<% } %>
+						
+						</form>
+					<div id="favForm">
+					<form action="MoodPageServlet">
+						<input type="hidden" name="mood-btn" value=<%=mood%>>
+						<div id="radio-buttons">
+							<input type="radio" name="type" value="movies"> Movies
+							<input type="radio" name="type" value="restaurants"> Restaurants
+							<input type="radio" name="type" value="music"> Music
+						</div>
+						<button id="subButton" type="submit">View recommendations for this type!</button>
+						<div id="calculating">Calculating...</div>
+					</form>
 					</div>
 				</div>
 			</div>
-			<div class="feature-inner row">
+		<div class="feature-inner row">
 				<%
 					for (int i = 0; i < movies.size(); i++) {
 				%>
 				<div class="col-lg-4 col-md-6">
 					<div class="feature-item">
 						<button style="background: none; border: none;" onclick="showMovieModal<%= i %>();">
-							<img style='height: 400px'
-								src=<%=movies.get(i).getThumbnailPath()%>> </img>
+							<img style='height: 200px'
+								src=<%=movies.get(i).getThumbnailPath()%>>
+							</img>
 						</button>
 
 						<h4><%=movies.get(i).getName()%></h4>
@@ -210,14 +277,26 @@
 							<p>
 								<%=movies.get(i).getDescription()%>
 							</p>
+							<%
+								
+								if(session.getAttribute("user") != null){
+							%>
+							<form action="addFavoriteServlet">
+								<input type="hidden" name="link" value=<%=movies.get(i).getID()%>>
+								<input type="hidden" name="movies" value=<%=movies%>>
+								<input type="hidden" name="user" value=<%=session.getAttribute("user").toString() %>> 
+								<input type="hidden" name="type" value=<%=type %>> 
+								<button class="favButton" type="submit">Favorite</button>
+							</form>
+							<% } %>
 						</div>
 					</div>
 				</div>
 				<%
 					}
 				%>
-
-			</div>
+			</div>	
+		</div>
 	</section>
 	<!-- End Result Area -->
 
@@ -289,16 +368,21 @@
 	</div>
 	<!-- ####################### End Scroll to Top Area ####################### -->
 
+	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	
 	<script>
 	function signout() {
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "SuedoSignoutServlet", false);
+		xhr.open("POST", "SuedoSignoutServlet", false);
 		xhr.send();
 	}
 	</script>
-
-	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	
 	<script>
+		$("#subButton").on("click", function(){
+			$("#calculating").fadeIn();
+		});
+	
 		var modal = document.getElementById("myModal");
 		var span = document.getElementsByClassName("close")[0];
 		
@@ -327,17 +411,40 @@
 				float rating = movie.getRating();
 		%>	
 		function showMovieModal<%= i %>() {
+			
 			var modal = document.getElementById("myModal");
 			
-			var thumbnailPath = "<img style='height: 300px' src=<%= thumbnailPath %>><img/>";
-			var title = "<h5><%= name %></h5>";
-			var description = "<b>Overview:</b> <%= description %><br />";
-			var genres = "<b>Genres:</b> <%= genres %><br />";
-			var releaseDate = "<b>Release Date:</b> <%= releaseDate %><br />";
-			var rating = "<b>Rating:</b> <%= rating %><br />";
+			var thumbnailPath = "<img style='height: 200px' src=<%= thumbnailPath %>><img/>";
+			var title = "<h5><%= name %></h5>"
+			<%
+			
+			if(type.equals("movies")){ %>
+				var description = "<b>Overview:</b> <%= description %><br />"
+			<% } else { %>
+				var description = "<b>Artist:</b> <%= description %><br />"
+			<% } %>
+			var genres = "<b>Genres:</b> <%= genres %><br />"
+			<%if(type.equals("movies")){ %>
+			var releaseDate = "<b>Release Date:</b> <%= releaseDate %><br />"
+			<% } else { %>
+				var releaseDate = "<b>Album Title:</b> <%= releaseDate %><br />"
+			<% } %>
+			<%if(type.equals("movies")){ %>
+				var rating = "<b>Rating:</b> <%= rating %><br />"
+			<% } %>
+		
+			//var btn = document.createElement("BUTTON");
+			//btn.textContent = "Favorite";
+			//btn.classList.add("favButton");
 			
 			$("#thumbnail-bloc").html(thumbnailPath);
-			$("#info-bloc").html(title + description + genres + releaseDate + rating);
+			<% if(type.equals("movies")){ %>
+				$("#info-bloc").html(title + description + genres + releaseDate + rating);
+				//$("#info-bloc").append(btn);
+			<% } else { %>
+				$("#info-bloc").html(title + description + genres + releaseDate);
+				//$("#info-bloc").append(btn);
+			<% } %>
 			modal.style.display = 'block';
 		}
 		<%

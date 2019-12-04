@@ -11,7 +11,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -23,7 +25,6 @@ import general.Query;
 
 public class TMDBQuery implements Query {
 
-	private static final String DATABASE_CREDENTIAL_STRING = "jdbc:mysql://google/MoodToDo?cloudSqlInstance=usc-cs201-lab7:us-central1:my-sql&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=admin&password=000000";
 	
 	private String moodKeyword;
 
@@ -38,41 +39,46 @@ public class TMDBQuery implements Query {
 
 		try {
 			// Get SQL database connection
-			Connection connection = null;
-			PreparedStatement preparedStatement = null;
-			ResultSet resultset = null;
+			// Get SQL database connection
+			Connection conn = null;
+			PreparedStatement state = null;
+			ResultSet results = null;
 
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(DATABASE_CREDENTIAL_STRING);
-			while (connection == null) {
-				connection = DriverManager.getConnection(DATABASE_CREDENTIAL_STRING);
+			while (conn == null) {
+				
+				conn = DriverManager.getConnection("jdbc:mysql://google/MoodToDo?cloudSqlInstance=moodtodo:us-central1:mood-db&socke" + 
+						"tFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=root");
 				System.out.println("Failed to connect to the database. " + "Re-establishing connection.");
 			}
 			System.out.println("Connection established.");
 
 			// Get the TMDB genreIds from the database.
+	
+			// Get the TMDB genreIds from the database.
+			
 			String sqlQuery = "SELECT * FROM TMDBMapping WHERE moodName = ?;";
-			preparedStatement = connection.prepareStatement(sqlQuery);
-			preparedStatement.setString(1, this.moodKeyword);
-			resultset = preparedStatement.executeQuery();
+			state = conn.prepareStatement(sqlQuery);
+			state.setString(1, this.moodKeyword);
+			results = state.executeQuery();
 
-			if (!resultset.next()) {
+			if (!results.next()) {
 				System.out.println("Unable to retain correct result set.");
 				return null;
 			}
 
-			genreIds = resultset.getString("genreIds");
-
-			if (resultset != null) {
-				resultset.close();
+			genreIds = results.getString("genreIds");
+			
+			if (results != null) {
+				results.close();
 			}
 
-			if (preparedStatement != null) {
-				preparedStatement.close();
+			if (state != null) {
+				state.close();
 			}
 
-			if (connection != null) {
-				connection.close();
+			if (conn != null) {
+				conn.close();
 			}
 
 		} catch (ClassNotFoundException cnfe) {
@@ -86,11 +92,20 @@ public class TMDBQuery implements Query {
 			URL apiUrl = null;
 			HttpURLConnection connection = null;
 			String resultString = "";
-			
+			Random rand = new Random();
+			int sort = rand.nextInt(4);
 			String apiStart = "https://api.themoviedb.org/3/discover/movie";
 			String apiKey = "?api_key=42aee1dd4cd43a1c4d80991d57ec04db";
 			String apiGenres = "&with_genres=" + genreIds;
 			String apiSort = "&sort_by=popularity.desc";
+			if(sort == 0) {
+				apiSort = "&sort_by=release_date.desc";
+			}else if(sort == 1) {
+				apiSort = "&sort_by=vote_count.desc";
+			}else if(sort == 2) {
+				apiSort= "&sort_by=vote_average.desc";
+			}
+			
 
 			System.out.println(apiStart + apiKey + apiGenres + apiSort);
 			
@@ -112,24 +127,57 @@ public class TMDBQuery implements Query {
 			JsonArray resultJsonArray = jsonParser.parse(resultString).getAsJsonObject().getAsJsonArray("results");
 
 			
+		
+			int k = 1;
 			
 			// Parse API's results
-			for (int i = 0; i < 6; i++) {
-				JsonObject result = resultJsonArray.get(i).getAsJsonObject();
+			
+			System.out.println("SIZE " + resultJsonArray.size());
+			if(resultJsonArray.size() > 19) {
+				k = rand.nextInt(3) + 1;
 				
-				String movieTitle = result.get("title").getAsString();
-				String posterPath = "https://image.tmdb.org/t/p/original" 
-						+ result.get("poster_path").getAsString();
-				String description = result.get("overview").getAsString().replace("\"", " ").replace("\'", " ");
+			}
+			for (int i = 0; i < 6; i++) {
+				
+				int temp = i * k;
+				try {
+				JsonObject result = resultJsonArray.get(temp).getAsJsonObject();
+				System.out.println(result.get("id"));
+				String id = result.get("id").getAsString();
+				String movieTitle = "Not Available.";
+				if(result.get("title") != null) {
+					movieTitle = result.get("title").getAsString();
+				}
+				String posterPath = ""; //put not available image here :)
+				if(result.has("poster_path") && result.get("poster_path") != null) {
+					System.out.println("why?");
+					posterPath = "https://image.tmdb.org/t/p/original" 
+							+ result.get("poster_path").getAsString();
+				}
+				String description = "No description available but hopefully it fits your mood!";
+				if(result.get("overview") != null) {
+					description = result.get("overview").getAsString().replace('\'', ' ').replace('\"', ' ');
+				}
 				ArrayList<String> genres = new ArrayList<String>();
 				for (JsonElement element : result.getAsJsonArray("genre_ids")) {
 					genres.add(GenreIdMapping.getGenre(element.getAsInt()));
 				}
-				String releaseDate = result.get("release_date").getAsString();
-				float rating = result.get("vote_average").getAsFloat();
+				String releaseDate ="Not available.";
+				if(result.get("release_date") != null) {
+					releaseDate = result.get("release_date").getAsString();
+				}
+				float rating = 0;
+				if(result.get("vote_average") != null) {
+					rating = result.get("vote_average").getAsFloat();
+				}
+				
 				
 				System.out.println(movieTitle);
-				queryResults.add(new Movie(movieTitle, posterPath, description, genres, releaseDate, rating));
+				
+				queryResults.add(new Movie(movieTitle, posterPath, description, genres, releaseDate, rating, id));
+				}catch(Exception e){
+					System.out.println("Exception so skipping this movie :)");
+				}
 			}
 			
 			br.close();
