@@ -132,6 +132,7 @@
 							
 						
 						<li><a href="Favorites.jsp">Favorites</a></li>
+						<li><a href="Preferences.jsp">Preferences</a></li>
 						<%
 							}
 						%>

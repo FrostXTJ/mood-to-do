@@ -5,7 +5,7 @@ import javax.websocket.*; // for space5
 import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint(value = "/wss")
-public class WebsocketServer {
+public class WebsocketServer extends Thread{
 	private static Vector<Session> sessionVector = new Vector<Session>();
 	
 	@OnOpen

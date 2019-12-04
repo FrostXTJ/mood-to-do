@@ -16,13 +16,13 @@ import javax.servlet.RequestDispatcher;
  * Servlet implementation class registerServlet
  */
 @WebServlet("/SuedoSignupServlet")
-public class SignupServlet extends HttpServlet {
+public class SuedoSignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignupServlet() {
+    public SuedoSignupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

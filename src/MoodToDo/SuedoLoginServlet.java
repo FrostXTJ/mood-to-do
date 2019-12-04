@@ -16,14 +16,14 @@ import javax.servlet.RequestDispatcher;
  * Servlet implementation class login
  */
 @WebServlet("/SuedoLoginServlet")
-public class LoginServlet extends HttpServlet {
+public class SuedoLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//needs to instead match something from the database
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public SuedoLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

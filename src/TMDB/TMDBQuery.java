@@ -156,7 +156,7 @@ public class TMDBQuery implements Query {
 				}
 				String description = "No description available but hopefully it fits your mood!";
 				if(result.get("overview") != null) {
-					description = result.get("overview").getAsString();
+					description = result.get("overview").getAsString().replace('\'', ' ').replace('\"', ' ');
 				}
 				ArrayList<String> genres = new ArrayList<String>();
 				for (JsonElement element : result.getAsJsonArray("genre_ids")) {
