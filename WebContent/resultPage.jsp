@@ -1,5 +1,6 @@
 <%@page import="general.Entry"%>
 <%@page import="TMDB.Movie"%>
+<%@page import="Yelp.Restaurant" %>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -172,6 +173,7 @@
 
 	<%
 		ArrayList<Entry> movies = (ArrayList<Entry>) request.getAttribute("movies");
+		ArrayList<Entry> restaurants = (ArrayList<Entry>) request.getAttribute("restaurants");
 	%>
 
 	<!--Start Result Area -->
@@ -208,8 +210,42 @@
 				<%
 					}
 				%>
-
 			</div>
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="section-title text-center" style="border-top: solid black 1px; padding-top: 50px;">
+						<p>Here are some restaurants we recommend.</p>
+					</div>
+				</div>
+			</div>
+			<div class="feature-inner row">
+				<%
+					for(int i=0; i<restaurants.size(); i++) {
+				%>
+				
+				<div class="col-lg-4 col-md-6">
+					<div class="feature-item">
+						<button style="background: none; border: none;" onclick="showRestModal<%= i %>();">
+							<img style='width: 267px'
+								src=<%=restaurants.get(i).getThumbnailPath()%>> </img>
+						</button>
+
+						<h4><%=restaurants.get(i).getName()%></h4>
+						<div class="wow fadeIn" data-wow-duration="1s"
+							data-wow-delay=".1s">
+							<p>
+								<%=restaurants.get(i).getDescription()%>
+							</p>
+						</div>
+					</div>
+				</div>
+				
+				<%
+					}
+				%>
+			</div>
+		</div>
+
 	</section>
 	<!-- End Result Area -->
 
@@ -322,6 +358,38 @@
 			
 			$("#thumbnail-bloc").html(thumbnailPath);
 			$("#info-bloc").html(title + description + genres + releaseDate + rating);
+			modal.style.display = 'block';
+		}
+		<%
+			}
+		%>
+		
+		<%
+		for (int i = 0; i < restaurants.size(); i++) {
+			Restaurant rest = (Restaurant)restaurants.get(i);
+			String name = rest.getName();
+			String thumbnailPath = rest.getThumbnailPath();
+			String yelpLink = rest.getLink();
+			String categories = "";
+			for (String category : rest.getCategories()) {
+				categories += category + ", ";  
+			}
+			categories = categories.substring(0, categories.length() - 2);
+			String price = rest.getPrice();
+			float rating = rest.getRating();
+		%>	
+		function showRestModal<%= i %>() {
+			var modal = document.getElementById("myModal");
+			
+			var thumbnailPath = "<img style='height: 300px' src=<%= thumbnailPath %>><img/>";
+			var title = "<h5><%= name %></h5>"
+			var description = "<a href=\"<%= yelpLink %> \">Yelp Reviews</a><br />"
+			var genres = "<b>Type:</b> <%= categories %><br />"
+			var price = "<b>Price:</b> <%= price %><br />"
+			var rating = "<b>Rating:</b> <%= rating %><br />"
+			
+			$("#thumbnail-bloc").html(thumbnailPath);
+			$("#info-bloc").html(title + genres + price + rating + description);
 			modal.style.display = 'block';
 		}
 		<%

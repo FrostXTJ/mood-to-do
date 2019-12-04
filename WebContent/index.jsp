@@ -36,6 +36,24 @@
 	<link rel="stylesheet" href="css/animate.min.css">
 	<link rel="stylesheet" href="css/owl.carousel.css">
 	<link rel="stylesheet" href="css/main.css">
+	
+	<script>
+		window.onload = function() {
+			navigator.geolocation.getCurrentPosition(showPosition, showError);
+			
+			function showPosition(position) {
+				var latitude = position.coords.latitude;
+				document.getElementById("lat").value = latitude.toString();
+				var longitude = position.coords.longitude;
+				document.getElementById("lon").value = longitude.toString();
+			}
+			
+			function showError(error) {
+				alert(error);
+			}
+		}
+
+	</script>
 </head>
 
 <body>
@@ -99,6 +117,8 @@
 							<button type="submit" name="mood-btn" value="lonely" data-wow-duration="1s" data-wow-delay="2.1s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
 								Lonely &#128546;
 							</button>
+							<input type="text" id="lat" name="latitude" style="display:none;">
+							<input type="text" id="lon" name="longitude" style="display:none;">
 						</form>
 					</div>
 				</div>
