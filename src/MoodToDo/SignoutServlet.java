@@ -15,13 +15,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class SuedoSignoutServlet
  */
 @WebServlet("/SuedoSignoutServlet")
-public class SuedoSignoutServlet extends HttpServlet {
+public class SignoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SuedoSignoutServlet() {
+    public SignoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
