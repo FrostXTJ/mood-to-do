@@ -9,14 +9,16 @@ public class Movie extends Entry {
 	private ArrayList<String> genres;
 	private String releaseDate;
 	float rating;
+
 	
 	@SuppressWarnings("unchecked")
 	public Movie(String name, String thumbnailPath, String description, 
-			ArrayList<String> genres, String releaseDate ,float rating) {
-		super(name, thumbnailPath, description);
+			ArrayList<String> genres, String releaseDate ,float rating, String id) {
+		super(name, thumbnailPath, description, id);
 		this.genres = (ArrayList<String>)genres.clone();
 		this.releaseDate = releaseDate;
 		this.rating = rating;
+	
 	}
 	
 	public ArrayList<String> getGenres() {
@@ -31,4 +33,5 @@ public class Movie extends Entry {
 		return this.rating;
 	}
 	
+
 }

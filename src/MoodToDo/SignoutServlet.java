@@ -15,13 +15,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class SuedoSignoutServlet
  */
 @WebServlet("/SuedoSignoutServlet")
-public class SuedoSignoutServlet extends HttpServlet {
+public class SignoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SuedoSignoutServlet() {
+    public SignoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +30,7 @@ public class SuedoSignoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("SignoutServlet in service.");
-		HttpSession session = request.getSession(false);
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		if (session != null) {
-			session.invalidate();
-			System.out.println("User signed out.");
-		}
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-		dispatcher.forward(request, response);
+		
 		
 	}
 
@@ -48,7 +39,13 @@ public class SuedoSignoutServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession session = request.getSession();
+    	if(session != null){
+    		session.invalidate();
+    	}
+    	//woo successful
+    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

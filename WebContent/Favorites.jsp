@@ -1,6 +1,3 @@
-<%@page import="general.User"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -30,8 +27,7 @@
 			CSS
 			============================================= -->
 	<link rel="stylesheet" href="css/custom.css">
-	<link rel="stylesheet"
-		href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
 	<link rel="stylesheet" href="css/linearicons.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
@@ -40,8 +36,25 @@
 	<link rel="stylesheet" href="css/animate.min.css">
 	<link rel="stylesheet" href="css/owl.carousel.css">
 	<link rel="stylesheet" href="css/main.css">
-	<style>
 	
+	<style>
+		#favHeader {
+			color: white;
+			display: block;
+			font-size: 50px;
+		}
+		#favForm {
+			display: block;
+		}
+		
+		#subButton {
+			background-color: white;
+			color: #39cfca;
+			border: 1px solid grey;
+			margin-top: 10px;
+			border-radius: 10px;
+		}
+		
 		.buttonLink {
 			color: white;
 			padding: 0;
@@ -63,53 +76,14 @@
 		}
 		
 		
-	
 	</style>
-	
-	<!-- Web Socket Script -->	
-	<script type="text/javascript">
-	var socket;
-	function connectToServer(){
-		
-		var wsUri = "ws://" + document.location.host +"/MoodToDo/wss";
-		console.log(wsUri);
-		socket = new WebSocket(wsUri);
-		socket.onopen = function(event) {
-			//document.getElementById("mychat").innerHTML = "Connected!"  + "<br />"  + "<br />";
-			console.log("Connected!");
-		};
-		socket.onmessage = function(event) {
-			document.getElementById("mychat").innerHTML = event.data + "<br />";
-			var elm = document.getElementById("mychat");
-			var newone = elm.cloneNode(true);
-			elm.parentNode.replaceChild(newone, elm);
-		};
-		socket.onclose = function(event) {
-			//document.getElementById("mychat").innerHTML = "Disconnected!"  + "<br />";
-			console.log("Disconnected!");
-		};
-	}
-	
-	function sendEmotion(emo){
-	<%
-		String username = "Guest";
-		if (session.getAttribute("user") != null) {
-			username = (String)session.getAttribute("user");
-		}
-	%>
-		socket.send("<%=username%> is feeling " + emo);
-		console.log(emo);
-		return false;
-	}
-	</script>
 </head>
 
-<body onload="connectToServer()">
+<body>
 
 	<!-- Start Header Area -->
 	<header id="header">
 		<div class="container">
-			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
 					<a href="index.html"><img src="" alt="" title="" /></a>
 				</div>
@@ -139,7 +113,7 @@
 					</ul>
 				</nav><!-- #nav-menu-container -->
 			</div>
-		</div>
+	
 	</header>
 	<!-- End Header Area -->
 
@@ -147,44 +121,24 @@
 	<!-- Start Banner Area -->
 	<section class="home-banner-area relative">
 		<div class="container">
-		<div id="mychat" data-wow-duration="1s" data-wow-delay=".3s" class="transparent mr-10 mb-10 wow fadeInDown" 
-				style="font-size: 18px; height:40px; border:none; padding: 50px; color: white;">
+		<div class="row fullscreen d-flex align-items-center justify-content-center">
+		<div class="banner-content col-lg-8 col-md-12">
+			<div>
+				<h1 id="favHeader" class="wow fadeIn" data-wow-duration="4s">Favorites</h1>
 			</div>
-			<div class="row fullscreen d-flex align-items-center justify-content-center">
-				<div class="banner-content col-lg-8 col-md-12">
-					<h1 class="wow fadeIn" data-wow-duration="4s">Follow your heart.<br/> Follow your mood.</h1>
-					
-					<h4 class="text-white">How do you feel right now?</h4>
-
-					<div class="courses pt-20">
-						<form action="MoodPageServlet">
-							<input type="hidden" name="type" value="movies">
-							<button type="submit" name="mood-btn" onclick="sendEmotion('Cheerful &#128516')" value="cheerful" data-wow-duration="1s" data-wow-delay=".3s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Cheerful &#128516;
-							</button>
-							
-							<button type="submit" name="mood-btn" onclick="sendEmotion('Excited &#128541')" value="excited" data-wow-duration="1s" data-wow-delay=".6s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Excited &#128541;
-							</button>
-							<button type="submit" name="mood-btn" onclick="sendEmotion('Romantic &#128536')" value="romantic" data-wow-duration="1s" data-wow-delay=".9s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Romantic &#128536;
-							</button>
-							<button type="submit" name="mood-btn" onclick="sendEmotion('Tense &#128534')" value="tense" data-wow-duration="1s" data-wow-delay="1.2s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;"> 
-								Tense &#128534;
-							</button>
-							<button type="submit" name="mood-btn" onclick="sendEmotion('Anxious &#128552')" value="anxious" data-wow-duration="1s" data-wow-delay="1.5s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Anxious &#128552;
-							</button>
-							<button type="submit" name="mood-btn" onclick="sendEmotion('Angry &#128545')" value="angry" data-wow-duration="1s" data-wow-delay="1.8s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Angry &#128545;
-							</button>
-							<button type="submit" name="mood-btn" onclick="sendEmotion('Lonely &#128546')" value="lonely" data-wow-duration="1s" data-wow-delay="2.1s" class="primary-btn transparent mr-10 mb-10 wow fadeInDown" style="font-size: 18px; height:40px;">
-								Lonely &#128546;
-							</button>
-						</form>
-					</div>
+				<div id="favForm">
+					<form action="favoritePageServlet">
+					<div id="radio-buttons">
+						<input type="radio" name="type" value="movies"> Movies
+						<input type="radio" name="type" value="restaurants"> Restaurants
+						<input type="radio" name="type" value="music"> Music
+						</div>
+						<button id="subButton" type=submit>View your Favorites!</button>
+					</form>
 				</div>
+					<div class="favorite"></div>
 			</div>
+		</div>
 		</div>
 		<div class="rocket-img">
 			<img src="img/rocket.png" alt="">
@@ -195,8 +149,8 @@
 	<!-- Start Footer Area -->
 	<footer class="footer-area section-gap">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-6 single-footer-widget">
+			<div class = "row">
+			<div class="col-lg-4 col-md-6 single-footer-widget">
 					<h4>Team Members</h4>
 					<ul>
 						<li>Frost Tianjian Xu</li>
@@ -207,17 +161,8 @@
 					</ul>
 				</div>
 				
-				<div class="col-lg-6 col-md-6 single-footer-widget">
-					<h4>Contact Us</h4>
-					<ul>
-						<li><a href="mailto: frostxu@usc.edu">frostxu@usc.edu</a></li>
-						<li><a href="mailto: wassynge@usc.edu">wassynge@usc.edu</a></li>
-						<li><a href="mailto: hknutson@usc.edu">hknutson@usc.edu</a></li>
-						<li><a href="mailto: bmindana@usc.edu">bmindana@usc.edu</a></li>
-						<li><a href="mailto: wuxuezhe@usc.edu">wuxuezhe@usc.edu</a></li>
-					</ul>
-				</div>
 			</div>
+			
 			<div class="footer-bottom row align-items-center">
 				<p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> | This webpage is a template made by <a href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -226,12 +171,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> | Thi
 		</div>
 	</footer>
 	<!-- End Footer Area -->
-	
-	<script>
-	
-	
-	</script>
-	
 
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

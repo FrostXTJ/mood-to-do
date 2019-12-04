@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import TMDB.SongQuery;
 import TMDB.TMDBQuery;
 import general.Entry;
 import general.Query;
@@ -36,15 +37,23 @@ public class MoodPageServlet extends HttpServlet {
 		response.setContentType("text/html");
 		System.out.println("MoodPage Servlet in action.");
 		String moodKeyword = request.getParameter("mood-btn");
+		String type = request.getParameter("type");
 		
 		// ADD USER INFO HERE
 		System.out.println("Mood " + moodKeyword + " was selected by user .");
 		// CONCURRENT BROADCASTING
+		ArrayList<Entry> results = null;
+		if(type.equals("music")) {
+			SongQuery songQuery = new SongQuery(moodKeyword);
+			results = songQuery.execute();
+		}else {
+			Query tmdbQuery = new TMDBQuery(moodKeyword);
+			results = tmdbQuery.execute(); 
+		}
 		
-		Query tmdbQuery = new TMDBQuery(moodKeyword);
-		ArrayList<Entry> movies = tmdbQuery.execute(); 
-		
-		request.setAttribute("movies", movies);
+		request.setAttribute("movies", results);
+		request.setAttribute("mood", moodKeyword);
+		request.setAttribute("type", type);
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/resultPage.jsp");
 		dispatcher.forward(request, response);
