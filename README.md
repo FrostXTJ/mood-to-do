@@ -7,10 +7,11 @@ You can either sign-up/login as a registered user, or continue as a guest. Only 
 
 ### Second Step: Choose the mood you are in 
 We provide several mood options, choose the mood you are now in!
-![index_screenshot](https://drive.google.com/open?id=1rff91HZAC0ytZEt99I_C_DDLjE3wKfxi)
+![index_screenshot](description_img/detail.png)
 
 ### Third Step: View Films/Music/Food Recommended for you
 Everything will be automatically tailored for you. Based on your mood and preference setting, Mood To Do will customize a list of films, restaurants, and songs which are just right for you!
+![index_screenshot](description_img/result.png)
 
 ### Technology Behind the Scene
 - Bootstrap for Better CSS design
